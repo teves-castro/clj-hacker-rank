@@ -1,0 +1,15 @@
+{
+  "atlascode.jira.workingSite": {
+    "id": "a8ac6974-503b-4994-8b05-16a19c075fc7",
+    "url": "https://cnissues.atlassian.net",
+    "name": "cnissues",
+    "scopes": [
+      "manage:jira-project",
+      "write:jira-work",
+      "read:jira-work",
+      "read:jira-user"
+    ],
+    "avatarUrl": "https://site-admin-avatar-cdn.prod.public.atl-paas.net/avatars/240/rocket.png",
+    "baseUrlSuffix": "atlassian.net"
+  }
+}
