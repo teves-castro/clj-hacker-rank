@@ -1,6 +1,32 @@
 (ns hacker-rank.arraymanipulation
   (:require [clojure.string :as str]))
 
+(set! *warn-on-reflection* true)
+
+(defn apply_operation [[lower upper value] array]
+  (let [updated (update array lower + value)]
+    (if (< upper (count array))
+      (update updated (inc upper) - value)
+      updated)))
+
+(defn process-operations [initial-ops n]
+  (reduce
+   (fn [acc cur] (apply_operation cur acc))
+   (vec (int-array (inc n)))
+   initial-ops))
+
+(defn calculate-max [array]
+  (second (reduce
+           (fn [[acc max] cur]
+             (let [tmp (+ acc cur)]
+               [tmp (if (> tmp max) tmp max)]))
+           [0 0]
+           array)))
+
+; Complete the arrayManipulation function below.
+(defn arrayManipulation' [[[_ n] & queries]]
+  (calculate-max (process-operations queries (inc n))))
+
 (defn apply-op [vals [from to op]]
   ; (let [ini (subvec vals 0 from)
   ;       mid (map (fn [x] (+ x op)) (subvec vals from (inc to)))
@@ -24,9 +50,8 @@
 (defn read-ops []
   (->> (read-lines)
        (map parse-line)
-       (map vec)
-       (take 1000)))
+       (map vec)))
 
 (->> (read-ops)
-     (arrayManipulation)
+     (arrayManipulation')
      (time))
