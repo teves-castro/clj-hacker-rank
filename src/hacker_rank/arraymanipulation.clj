@@ -9,8 +9,8 @@
 
 (defn calculate-max [ops]
   (->> ops
-       (reduce-kv
-        (fn [[acc m] _ cur]
+       (reduce
+        (fn [[acc m] [_ cur]]
           (let [tmp (+ acc cur)]
             [tmp (max tmp m)]))
         [0 0])
@@ -32,10 +32,8 @@
        (map parse-line)
        (map vec)))
 
-(->> (read-ops)
-     (arrayManipulation)
-     (time))
+; (->> (read-ops)
+;      (arrayManipulation)
+;      (time))
 
-(time (arrayManipulation [[10000000 1] [7253005 9867484 26205]]))
-
-; (->> 10000000 range)
+; (arrayManipulation [[10 3] [12 23 100] [15 20 -5] [5 100 50]])
